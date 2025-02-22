@@ -13,16 +13,36 @@ std::string convToLower(std::string src)
 
 /** Complete the code to convert a string containing a rawWord
     to a set of words based on the criteria given in the assignment **/
-std::set<std::string> parseStringToWords(string rawWords)
+    //J. Crew -> jcrew
+std::set<string> parseStringToWords(string rawWords)
 {
-
-
-
-
-
-
-
-
+    set<string> keyWords;
+    string temp = ""; 
+    for (size_t i = 0; i < rawWords.size(); i++){
+        if (rawWords[i] == ' '){
+            if (temp.size() < 2){
+                temp.clear();
+                continue;
+            }
+            keyWords.insert(convToLower(temp));
+            temp.clear();
+        }
+        else if (ispunct(rawWords[i])){
+            if (temp.size() < 2){
+                temp.clear();
+                continue;
+            }
+            keyWords.insert(convToLower(temp));
+            temp.clear();
+        }
+        else {
+            temp += rawWords[i];
+        }
+    }
+    if (temp.size() >= 2){
+        keyWords.insert(convToLower(temp));
+    }
+    return keyWords;
 
 
 }
